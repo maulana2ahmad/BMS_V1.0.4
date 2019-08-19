@@ -25,7 +25,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout mdrawerLayout;
     private Toolbar toolbar;
 
-    private String TITLE = "Summary";
+    private String title = "Summary";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         mNavigation.setNavigationItemSelectedListener(this);
 
-
         setSupportActionBar(toolbar);
+
+        //toolbar.setLogo(R.drawable.logomnc); //use logo no click
         toolbar.setNavigationIcon(R.drawable.logomnc);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //arrow back in toolbal
 
         mdrawerLayout.addDrawerListener(toggle);
         toggle = new ActionBarDrawerToggle(HomeActivity.this, mdrawerLayout, toolbar,
@@ -49,12 +50,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         //main layout
         if (savedInstanceState == null) {
+            title = ("Summary 4 TV");
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, new SummaryFragment())
                     .commit();
             mNavigation.setCheckedItem(R.id.menu_summary);
             //end main layout
+        }
+
+        setActionBarTitle(title);
+
+    }
+
+    //method title
+    private void setActionBarTitle(String title) {
+
+        if (getSupportActionBar() != null)
+        {
+            getSupportActionBar().setTitle(title);
         }
     }
 
@@ -65,24 +79,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId())
         {
             case R.id.menu_summary :
+                title = ("Summary 4 TV");
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new SummaryFragment())
                         .commit();
                 break;
             case R.id.menu_occupancyByTv :
+                title = ("Occupancy By TV");
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new OccupancyByTVFragment())
                         .commit();
                 break;
             case R.id.menu_occupancyDetail :
+                title = ("Occupancy Detail");
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new OccupancyDetileFragment())
                         .commit();
                 break;
             case R.id.menu_occupancy_industry :
+                title = ("Occupancy Industry");
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragment_container, new OccupancyIndustryFragment())
@@ -91,7 +109,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
 
         mdrawerLayout.closeDrawer(GravityCompat.START);
-        return false;
+        return true;
     }
 
     @Override
