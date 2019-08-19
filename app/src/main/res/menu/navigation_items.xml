@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_summary"
+            android:icon="@drawable/ic_summary"
+            android:title="Summary 4 TV" />
+
+        <item
+            android:id="@+id/menu_occupancyByTv"
+            android:icon="@drawable/ic_occupancy_bytv"
+            android:title="Occupancy By TV" />
+
+        <item android:icon="@drawable/ic_occupancy_detail"
+            android:id="@+id/menu_occupancyDetail"
+            android:title="Occupancy Detail"/>
+
+        <item android:id="@+id/menu_occupancy_industry"
+            android:title="Occupancy Industry"
+            android:icon="@drawable/ic_ocupancy_industry"/>
+
+    </group>
+</menu>
