@@ -1,4 +1,4 @@
-package com.example.bms.view;
+package com.example.bms;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -10,11 +10,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.bms.R;
-import com.example.bms.view.fragment.OccupancyByTVFragment;
-import com.example.bms.view.fragment.OccupancyDetileFragment;
-import com.example.bms.view.fragment.OccupancyIndustryFragment;
-import com.example.bms.view.fragment.SummaryFragment;
+import com.example.bms.fragment.OccupancyByTVFragment;
+import com.example.bms.fragment.OccupancyDetileFragment;
+import com.example.bms.fragment.OccupancyIndustryFragment;
+import com.example.bms.fragment.SummaryFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

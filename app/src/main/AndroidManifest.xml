@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.LoginActivity"
+        <activity android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.HomeActivity"
+        <activity android:name=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".view.SplashScreenActivity"
+            android:name=".SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.GetStartedActivity"
+            android:name=".GetStartedActivity"
             android:theme="@style/AppTheme.NoActionBar.FullScreen" />
     </application>
 

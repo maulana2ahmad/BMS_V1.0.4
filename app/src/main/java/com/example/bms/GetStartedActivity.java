@@ -1,4 +1,4 @@
-package com.example.bms.view;
+package com.example.bms;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import com.example.bms.R;
-import com.example.bms.view.HomeActivity;
 
 public class GetStartedActivity extends AppCompatActivity {
 

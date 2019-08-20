@@ -1,4 +1,4 @@
-package com.example.bms.view.fragment;
+package com.example.bms.fragment;
 
 
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import com.example.bms.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OccupancyIndustryFragment extends Fragment {
+public class SummaryFragment extends Fragment {
 
 
-    public OccupancyIndustryFragment() {
+    public SummaryFragment() {
         // Required empty public constructor
     }
 
@@ -26,7 +26,7 @@ public class OccupancyIndustryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_occupancy_industry, container, false);
+        return inflater.inflate(R.layout.fragment_summary, container, false);
     }
 
 }
