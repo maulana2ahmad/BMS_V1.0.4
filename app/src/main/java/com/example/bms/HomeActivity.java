@@ -39,13 +39,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         setSupportActionBar(toolbar);
 
-        //toolbar.setLogo(R.drawable.logomnc); //use logo no click
-        toolbar.setNavigationIcon(R.drawable.logomnc);
+        toolbar.setLogo(R.drawable.logomnc); //use logo no click
+        //toolbar.setNavigationIcon(R.drawable.logomnc);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true); //arrow back in toolbal
 
         mdrawerLayout.addDrawerListener(toggle);
         toggle = new ActionBarDrawerToggle(HomeActivity.this, mdrawerLayout, toolbar,
                 R.string.open, R.string.close);
+        toggle.syncState();
 
         //main layout
         if (savedInstanceState == null) {
@@ -84,6 +85,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         .replace(R.id.fragment_container, new SummaryFragment())
                         .commit();
                 break;
+
             case R.id.menu_occupancyByTv :
                 title = ("Occupancy By TV");
                 getSupportFragmentManager()
@@ -91,6 +93,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         .replace(R.id.fragment_container, new OccupancyByTVFragment())
                         .commit();
                 break;
+
             case R.id.menu_occupancyDetail :
                 title = ("Occupancy Detail");
                 getSupportFragmentManager()
@@ -98,6 +101,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         .replace(R.id.fragment_container, new OccupancyDetileFragment())
                         .commit();
                 break;
+
             case R.id.menu_occupancy_industry :
                 title = ("Occupancy Industry");
                 getSupportFragmentManager()
