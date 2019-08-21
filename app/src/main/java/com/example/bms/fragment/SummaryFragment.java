@@ -1,31 +1,29 @@
 package com.example.bms.fragment;
 
 
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.http.SslError;
+import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.webkit.SslErrorHandler;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.example.bms.R;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,10 +32,15 @@ public class SummaryFragment extends Fragment {
 
     private ProgressBar mprogressBar;
     private WebView wbSummry;
-    private AlertDialog.Builder dialog;
+    private SwipeRefreshLayout mswipeRefreshLayout;
+
 
     //url
     private String pageUrl = "http://portal-bams.mncgroup.com:8008";
+
+    private String DEFAULT_ERROR_PAGE_PATH = "file:///android_asset/html/html/default_error_page.html";
+
+    private static final String TAG = "WebViewCustomization";
 
     public SummaryFragment() {
         // Required empty public constructor
@@ -51,130 +54,53 @@ public class SummaryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
 
-        //mprogressBar = (ProgressBar) view.findViewById(R.id.progress_loading);
         wbSummry = (WebView) view.findViewById(R.id.wv_Summry);
-        mprogressBar = (ProgressBar) view.findViewById(R.id.progress_loading);
+        //mprogressBar = (ProgressBar) view.findViewById(R.id.progress_loading);
+        mswipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
 
+        LoadWeb();
 
-        wbSummry.getSettings().setJavaScriptEnabled(true); //active javaScriptEnabled
-        wbSummry.setHorizontalScrollBarEnabled(false);
-        wbSummry.loadUrl(pageUrl);
-
-        //wbSummry.setWebViewClient(new WebViewClient());
-        wbSummry.setWebChromeClient(new WebChromeClient() {
+        mswipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
+            public void onRefresh() {
 
-                mprogressBar.setProgress(newProgress);
-                if (newProgress < 100 && mprogressBar.getVisibility() == ProgressBar.GONE) {
-                    mprogressBar.setVisibility(ProgressBar.VISIBLE);
-                }
-
-                mprogressBar.setProgress(newProgress);
-                if (newProgress == 100) {
-                    mprogressBar.setVisibility(ProgressBar.GONE);
-                }
-
+                LoadWeb();
             }
-
         });
 
-        wbSummry.setWebViewClient(new WebViewClient() {
-
-
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-
-                try {
-                    wbSummry.stopLoading();
-                } catch (Exception e) {
-                }
-                try {
-                    wbSummry.clearView();
-                } catch (Exception e) {
-                }
-                if (wbSummry.canGoBack()) {
-                    wbSummry.goBack();
-                }
-
-//                try {
-//                    wbSummry.stopLoading();
-//                } catch (Exception e) {
-//                }
-//
-//                if (wbSummry.canGoBack()) {
-//                    wbSummry.goBack();
-//                }
-
-                wbSummry.loadUrl("about:blank");
-                new AlertDialog.Builder(getActivity().getApplicationContext())
-                        .setTitle("Delete entry")
-                        .setMessage("Are you sure you want to delete this entry?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                //  deleteSuggestions(position);
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
-
-                super.onReceivedError(view, request, error);
-
-            }
-
-            //@Override
-//            public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
-//                super.onReceivedHttpError(view, request, errorResponse);
-//
-//                Toast.makeText(getActivity(), "Unexpected error occurred.Reload page again.", Toast.LENGTH_SHORT).show();
-//                if(errorResponse.getStatusCode() == 401){
-//                    wbSummry.loadUrl(pageUrl);
-//                }
-//            }
-
-
-            /*
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-
-
-                String message = null;
-                switch (error.getPrimaryError()) {
-                    case SslError.SSL_UNTRUSTED:
-                        message = "The certificate authority is not trusted.";
-                        break;
-                    case SslError.SSL_EXPIRED:
-                        message = "The certificate has expired.";
-                        break;
-                    case SslError.SSL_IDMISMATCH:
-                        message = "The certificate Hostname mismatch.";
-                        break;
-                    case SslError.SSL_INVALID:
-                        message = "SSL connection is invalid.";
-                        break;
-                }
-                super.onReceivedSslError(view, handler, error);
-
-//            @Override
-//            public void onReceivedClientCertRequest(WebView view, ClientCertRequest request) {
-//                super.onReceivedClientCertRequest(view, request);
-                //           }
-
-
-            }
-            */
-
-        });
-
+        LoadWeb();
 
         return view;
     }
 
+    private void LoadWeb() {
 
+        wbSummry.getSettings().setJavaScriptEnabled(true);
+        wbSummry.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
+        //wbSummry.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        wbSummry.getSettings().setDomStorageEnabled(true);
+        wbSummry.getSettings().setAppCacheEnabled(true);
+        wbSummry.getSettings().setSupportZoom(true);
+        wbSummry.loadUrl(pageUrl);
+        //wbSummry.addJavascriptInterface(new SimpleWebJavascriptInterface(this), "Android");
+        mswipeRefreshLayout.setRefreshing(true);
+        mswipeRefreshLayout.setColorSchemeResources(R.color.greenPrimary, R.color.yellowPrimary, R.color.redPrimary, R.color.bluePrimary);
+        wbSummry.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+
+                wbSummry.loadUrl(DEFAULT_ERROR_PAGE_PATH);
+
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+
+                mswipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+    }
 }

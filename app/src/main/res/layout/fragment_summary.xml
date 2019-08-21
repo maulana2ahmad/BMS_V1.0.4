@@ -6,24 +6,23 @@
     android:orientation="vertical"
     tools:context=".fragment.SummaryFragment">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <!-- TODO: Update blank fragment layout -->
-    <ProgressBar
-        android:id="@+id/progress_loading"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:padding="2dip"
-        android:visibility="visible"/>
+    <!--<ProgressBar-->
+        <!--android:id="@+id/progress_loading"-->
+        <!--style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
 
     <WebView
         android:id="@+id/wv_Summry"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!--
-    android:background="@color/transparent"
-    android:fitsSystemWindows="false"
-    tools:background="@color/bluePrimary"-->
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

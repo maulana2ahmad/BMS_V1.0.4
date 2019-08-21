@@ -13,4 +13,9 @@
     <color name="whitePrimary">#FFFFFF</color>
     <color name="gray_secondary">#F1F2F5</color>
     <color name="transparent">#80000000</color>
+
+    <!--color mnctv-->
+    <color name="yellowPrimary">#F8E007</color>
+    <color name="redPrimary">#FC1201</color>
+    <color name="greenPrimary">#0AC011</color>
 </resources>
