@@ -38,7 +38,7 @@ public class SummaryFragment extends Fragment {
     //url
     private String pageUrl = "http://portal-bams.mncgroup.com:8008";
 
-    private String DEFAULT_ERROR_PAGE_PATH = "file:///android_asset/html/html/default_error_page.html";
+    private String DEFAULT_ERROR_PAGE_PATH = "file:///android_asset/html/colorlib_error_404_10/index.html";
 
     private static final String TAG = "WebViewCustomization";
 
@@ -81,8 +81,9 @@ public class SummaryFragment extends Fragment {
         wbSummry.getSettings().setDomStorageEnabled(true);
         wbSummry.getSettings().setAppCacheEnabled(true);
         wbSummry.getSettings().setSupportZoom(true);
+        wbSummry.getSettings().setSupportMultipleWindows(true);
         wbSummry.loadUrl(pageUrl);
-        //wbSummry.addJavascriptInterface(new SimpleWebJavascriptInterface(this), "Android");
+        //wbSummry.addJavascriptInterface(new SimpleWebJavascriptInterface(getActivity()), "Android");
         mswipeRefreshLayout.setRefreshing(true);
         mswipeRefreshLayout.setColorSchemeResources(R.color.greenPrimary, R.color.yellowPrimary, R.color.redPrimary, R.color.bluePrimary);
         wbSummry.setWebViewClient(new WebViewClient() {
