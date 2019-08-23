@@ -2,6 +2,7 @@ package com.example.bms;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Button btn_singin2;
     private EditText edt_Username, edt_Password;
+
+    //token
+    private String token;
 
     //private static final String EMAIL_ADDRESS = "@mncgroup.com"
     //private static final String USERNAME_PATTERN = "^[a-z0-9_-]{3,15}$";
@@ -84,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Call<ResponseBody> call = ApiRetrofit
                 .getInstance()
                 .getApiClien()
-                .loginUser(username, password);
+                .UserLdapClient(username, password);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -92,6 +96,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 try {
                     String s = response.body().string();
+
+
 
                     Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
 
