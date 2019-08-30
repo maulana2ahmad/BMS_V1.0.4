@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.bms.model.AccessTokenLdap;
 import com.example.bms.services.ApiRetrofit;
+import com.example.bms.services.ClientLdap;
 
 import java.io.IOException;
 
@@ -44,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    //method login
     private void userLogin() {
         String username = edt_Username.getText().toString().trim();
         String password = edt_Password.getText().toString().trim();
@@ -84,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         */
 
+
         //call class interface and class Apiretrofit
         Call<ResponseBody> call = ApiRetrofit
                 .getInstance()
@@ -94,15 +99,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
-                try {
-                    String s = response.body().string();
+                if (response.isSuccessful())
+                {
+                    try {
+                        Toast.makeText(LoginActivity.this, response.body().string(), Toast.LENGTH_SHORT).show();
 
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        intent.putExtra("token",response.body().string());
+                        startActivity(intent);
+                        finish();
 
-
-                    Toast.makeText(LoginActivity.this, s, Toast.LENGTH_LONG).show();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -113,8 +126,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+        /*
+        Call<AccessTokenLdap> call2 = ApiRetrofit
+                .getInstance()
+                .getApiClien()
+                .getAccessTokenLdap(token);
 
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+        */
     }
+
 
     @Override
     public void onClick(View view) {

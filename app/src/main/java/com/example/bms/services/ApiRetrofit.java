@@ -7,16 +7,24 @@ public class ApiRetrofit {
 
     //private static Retrofit retrofit = null;
 
-    private String BASE_URL = "http://portal-bams.mncgroup.com:8008";
+    private String BASE_URL = "http://portal-bams.mncgroup.com:8008/";
 
     private static  ApiRetrofit mIntence;
 
     private Retrofit retrofit;
 
-    private ApiRetrofit()
+    public ApiRetrofit()
     {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
+    public void ApiRetrofit2(String token)
+    {
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL + token)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

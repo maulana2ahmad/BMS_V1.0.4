@@ -14,6 +14,7 @@ import com.example.bms.fragment.OccupancyByTVFragment;
 import com.example.bms.fragment.OccupancyDetileFragment;
 import com.example.bms.fragment.OccupancyIndustryFragment;
 import com.example.bms.fragment.SummaryFragment;
+import com.example.bms.services.ApiRetrofit;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +24,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView mNavigation;
     private DrawerLayout mdrawerLayout;
     private Toolbar toolbar;
+    private String token;
 
     private String title = "Summary";
 
@@ -30,6 +32,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        token = getIntent().getStringExtra("token");
 
         mdrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -53,7 +57,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             title = ("Summary 4 TV");
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container, new SummaryFragment())
+                    .replace(R.id.fragment_container, new SummaryFragment(token))
                     .commit();
             mNavigation.setCheckedItem(R.id.menu_summary);
             //end main layout
@@ -61,6 +65,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         setActionBarTitle(title);
 
+        retrotittoketn();
+
+    }
+
+    private void retrotittoketn() {
+
+        ApiRetrofit retrofittoken = new ApiRetrofit();
+        retrofittoken.ApiRetrofit2(token);
     }
 
     //method title
@@ -82,7 +94,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 title = ("Summary 4 TV");
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, new SummaryFragment())
+                        .replace(R.id.fragment_container, new SummaryFragment(token))
                         .commit();
                 break;
 
