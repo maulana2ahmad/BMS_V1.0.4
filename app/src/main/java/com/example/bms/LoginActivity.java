@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.bms.model.AccessTokenLdap;
+import android.content.SharedPreferences;
 import com.example.bms.services.ApiRetrofit;
-import com.example.bms.services.ClientLdap;
 
 import java.io.IOException;
 
@@ -95,10 +93,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .getApiClien()
                 .UserLdapClient(username, password);
 
+        Log.e("TEST", "123456");
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
+                try {
+                    Log.e("TEST", response.body().string());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 if (response.isSuccessful())
                 {
                     try {
@@ -106,6 +110,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         intent.putExtra("token",response.body().string());
+						
+						 SharedPreferences.Editor sp
+                                        = getSharedPreferences("TOKEN",
+                                        MODE_PRIVATE).edit();
+
+						sp.putString("x", response.body().string());
+						sp.commit();
+						
                         startActivity(intent);
                         finish();
 

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +16,8 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.example.bms.R;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +50,8 @@ public class SummaryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
 
         getActivity().setTitle("Summry 4 Tv");
+		
+		this.token = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE).getString("x", "");
 
         wbSummry = (WebView) view.findViewById(R.id.wv_Summry);
         mswipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
