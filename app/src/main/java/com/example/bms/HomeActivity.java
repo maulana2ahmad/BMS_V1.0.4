@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -122,6 +123,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_logout:
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
+                getSharedPreferences("TOKEN", 0).edit().clear().commit();
+
         }
 
         mdrawerLayout.closeDrawer(GravityCompat.START);
