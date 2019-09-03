@@ -93,42 +93,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .getApiClien()
                 .UserLdapClient(username, password);
 
-        Log.e("TEST", "123456");
+
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 try {
-                    Log.e("TEST", response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (response.isSuccessful())
-                {
-                    try {
-                        Toast.makeText(LoginActivity.this, response.body().string(), Toast.LENGTH_SHORT).show();
+                     //Log.e("TEST2", response.body().string());
 
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        intent.putExtra("token",response.body().string());
-						
-						 SharedPreferences.Editor sp
-                                        = getSharedPreferences("TOKEN",
-                                        MODE_PRIVATE).edit();
+                        String resp = response.body().string();
+                        Log.e("AAAA2", resp);
 
-						sp.putString("x", response.body().string());
-						sp.commit();
-						
-                        startActivity(intent);
-                        finish();
+                        if(resp.trim().equals("gagal"))
+                        {
+                            Log.e("LOGINGAGAL", "x");
+                            Toast.makeText(LoginActivity.this, "Gagal Login", Toast.LENGTH_SHORT).show();
+                            return;
 
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, response.body().string(), Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            intent.putExtra("token", response.body().string());
+
+                            SharedPreferences.Editor sp
+                                    = getSharedPreferences("TOKEN",
+                                    MODE_PRIVATE).edit();
+
+                            sp.putString("x", response.body().string());
+                            sp.commit();
+
+                            startActivity(intent);
+                            finish();
+
+                        }
                     } catch (IOException e) {
+                    Log.e("ERROR", Log.getStackTraceString(e));
                         e.printStackTrace();
                     }
-                }
-                else
-                {
-                    Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                }
+
 
             }
 

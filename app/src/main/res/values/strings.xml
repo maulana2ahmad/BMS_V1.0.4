@@ -8,4 +8,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="connection_down">Wifi and Mobile Data area supported</string>
     <string name="try_againt">Try Againt</string>
+    <string name="logout">Logout</string>
+    <string name="help_feedbac"><![CDATA[Help & Feedbac]]></string>
+    <string name="summry4tv">Summary 4 TV</string>
 </resources>

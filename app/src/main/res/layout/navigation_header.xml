@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
+    android:layout_height="90dp"
     android:background="@color/bluePrimary"
-    android:gravity="bottom"
-    android:orientation="vertical"
+    android:gravity="center|start"
+    android:orientation="horizontal"
     android:padding="15dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -15,11 +17,11 @@
         android:src="@drawable/logomnc" />
 
     <TextView
-        android:id="@+id/tv_email"
+        android:id="@+id/tv_username"
+        style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:text="maulana@inludedev8.com"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:paddingLeft="10dp"
+        tools:text="Username" />
 
 </LinearLayout>

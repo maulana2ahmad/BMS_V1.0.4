@@ -15,13 +15,30 @@
             android:icon="@drawable/ic_occupancy_bytv"
             android:title="Occupancy By TV" />
 
-        <item android:icon="@drawable/ic_occupancy_detail"
+        <item
             android:id="@+id/menu_occupancyDetail"
-            android:title="Occupancy Detail"/>
+            android:icon="@drawable/ic_occupancy_detail"
+            android:title="Occupancy Detail" />
 
-        <item android:id="@+id/menu_occupancy_industry"
-            android:title="Occupancy Industry"
-            android:icon="@drawable/ic_ocupancy_industry"/>
-
+        <item
+            android:id="@+id/menu_occupancy_industry"
+            android:actionLayout="@layout/fragment_occupancy_industry"
+            android:icon="@drawable/ic_ocupancy_industry"
+            android:title="Occupancy Industry" />
     </group>
+
+    <item android:title="Lainnya">
+        <menu>
+            <!--<item-->
+                <!--android:id="@+id/menu_setting"-->
+                <!--android:icon="@drawable/ic_help"-->
+                <!--android:title="@string/help_feedbac" />-->
+
+            <item
+                android:id="@+id/menu_logout"
+                android:icon="@drawable/ic_exit"
+                android:title="@string/logout" />
+        </menu>
+    </item>
+
 </menu>

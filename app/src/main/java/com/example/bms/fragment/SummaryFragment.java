@@ -48,14 +48,12 @@ public class SummaryFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
-
-        getActivity().setTitle("Summry 4 Tv");
 		
 		this.token = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE).getString("x", "");
 
         wbSummry = (WebView) view.findViewById(R.id.wv_Summry);
-        mswipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
 
+        mswipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
         mswipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
