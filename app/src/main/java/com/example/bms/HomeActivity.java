@@ -69,7 +69,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             //end main layout
         }
 
-        setActionBarTitle(title);
+        //setActionBarTitle(title);
 
         retrotittoketn();
 
@@ -123,7 +123,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.menu_logout:
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
-                getSharedPreferences("TOKEN", 0).edit().clear().commit();
+                getSharedPreferences("TOKEN", 0)
+                        .edit()
+                        .clear()
+                        .commit();
 
         }
 

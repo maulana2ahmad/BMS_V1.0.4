@@ -55,11 +55,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //            Toast.makeText(LoginActivity.this, "Network connection is not available!", Toast.LENGTH_SHORT).show();
 //
 //        }
-
     }
 
     //method login
     private void userLogin() {
+
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+                R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
+        progressDialog.show();
+
         String username = edt_Username.getText().toString().trim();
         String password = edt_Password.getText().toString().trim();
 
@@ -99,7 +105,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         */
 
-
         //call class interface and class Apiretrofit
         Call<ResponseBody> call = ApiRetrofit
                 .getInstance()
@@ -120,7 +125,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //if (resp != null) {
                     if (resp.trim().equals("gagal")) {
                         Log.e("LOGINGAGAL", "x");
-                        Toast.makeText(LoginActivity.this, "Gagal Login", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
                         return;
 
                     } else {
@@ -136,19 +142,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         sp.putString("x", response.body().string());
                         sp.commit();
-
                         startActivity(intent);
                         finish();
 
                     }
-
                     //}
                 } catch (IOException e) {
                     Log.e("ERROR", Log.getStackTraceString(e));
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
@@ -161,31 +163,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 } else if (!haveNetwork()) {
 
                     Toast.makeText(LoginActivity.this, "Network connection is not available!", Toast.LENGTH_SHORT).show();
-
                 }
                 //Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        /*
-        Call<AccessTokenLdap> call2 = ApiRetrofit
-                .getInstance()
-                .getApiClien()
-                .getAccessTokenLdap(token);
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-        */
     }
 
 

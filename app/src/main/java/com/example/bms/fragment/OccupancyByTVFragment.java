@@ -46,7 +46,7 @@ public class OccupancyByTVFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_occupancy_by_tv, container, false);
 
-        //getActivity().setTitle("Occupancy Industry");
+        getActivity().setTitle("Occupancy By TV");
 
         //this.token = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE).getString("x", "");
 

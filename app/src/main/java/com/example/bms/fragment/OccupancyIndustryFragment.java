@@ -48,7 +48,7 @@ public class OccupancyIndustryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_occupancy_industry, container, false);
 
-        //getActivity().setTitle("Occupancy Industry");
+        getActivity().setTitle("Occupancy Industry");
 
         //this.token = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE).getString("x", "");
 

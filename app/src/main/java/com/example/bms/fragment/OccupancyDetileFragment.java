@@ -46,7 +46,7 @@ public class OccupancyDetileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_occupancy_detile, container, false);
 
-        //getActivity().setTitle("Occupancy Industry");
+        getActivity().setTitle("Occupancy Detile");
 
         //this.token = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE).getString("x", "");
 
