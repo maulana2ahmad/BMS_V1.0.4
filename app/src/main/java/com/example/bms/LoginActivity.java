@@ -2,7 +2,10 @@ package com.example.bms;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.content.SharedPreferences;
+
 import com.example.bms.services.ApiRetrofit;
 
 import java.io.IOException;
@@ -42,6 +46,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         findViewById(R.id.btn_singin2).setOnClickListener(LoginActivity.this);
 
+//        if (haveNetwork()){
+//
+//            userLogin();
+//
+//        } else if (!haveNetwork())
+//        {
+//            Toast.makeText(LoginActivity.this, "Network connection is not available!", Toast.LENGTH_SHORT).show();
+//
+//        }
 
     }
 
@@ -99,39 +112,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
                 try {
-                     //Log.e("TEST2", response.body().string());
+                    //Log.e("TEST2", response.body().string());
 
-                        String resp = response.body().string();
-                        Log.e("AAAA2", resp);
+                    String resp = response.body().string();
+                    Log.e("AAAA2", resp);
 
-                        if(resp.trim().equals("gagal"))
-                        {
-                            Log.e("LOGINGAGAL", "x");
-                            Toast.makeText(LoginActivity.this, "Gagal Login", Toast.LENGTH_SHORT).show();
-                            return;
+                    //if (resp != null) {
+                    if (resp.trim().equals("gagal")) {
+                        Log.e("LOGINGAGAL", "x");
+                        Toast.makeText(LoginActivity.this, "Gagal Login", Toast.LENGTH_SHORT).show();
+                        return;
 
-                        }
-                        else {
-                            Toast.makeText(LoginActivity.this, response.body().string(), Toast.LENGTH_SHORT).show();
+                    } else {
 
-                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                            intent.putExtra("token", response.body().string());
+                        //Toast.makeText(LoginActivity.this, response.body().string(), Toast.LENGTH_SHORT).show();
 
-                            SharedPreferences.Editor sp
-                                    = getSharedPreferences("TOKEN",
-                                    MODE_PRIVATE).edit();
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        intent.putExtra("token", response.body().string());
 
-                            sp.putString("x", response.body().string());
-                            sp.commit();
+                        SharedPreferences.Editor sp
+                                = getSharedPreferences("TOKEN",
+                                MODE_PRIVATE).edit();
 
-                            startActivity(intent);
-                            finish();
+                        sp.putString("x", response.body().string());
+                        sp.commit();
 
-                        }
-                    } catch (IOException e) {
-                    Log.e("ERROR", Log.getStackTraceString(e));
-                        e.printStackTrace();
+                        startActivity(intent);
+                        finish();
+
                     }
+
+                    //}
+                } catch (IOException e) {
+                    Log.e("ERROR", Log.getStackTraceString(e));
+                    e.printStackTrace();
+                }
 
 
             }
@@ -139,7 +154,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                if (haveNetwork()) {
+
+                    //userLogin();
+
+                } else if (!haveNetwork()) {
+
+                    Toast.makeText(LoginActivity.this, "Network connection is not available!", Toast.LENGTH_SHORT).show();
+
+                }
+                //Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
         /*
@@ -176,5 +200,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                break;
         }
 
+    }
+
+    //check conection internet
+    private boolean haveNetwork() {
+        boolean have_WIFI = false;
+        boolean have_MOBILEData = false;
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
+
+        for (NetworkInfo info : networkInfos) {
+            if (info.getTypeName().equalsIgnoreCase("WIFI"))
+                if (info.isConnected())
+                    have_WIFI = true;
+
+            if (info.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (info.isConnected())
+                    have_MOBILEData = true;
+        }
+
+        return have_MOBILEData || have_WIFI;
     }
 }

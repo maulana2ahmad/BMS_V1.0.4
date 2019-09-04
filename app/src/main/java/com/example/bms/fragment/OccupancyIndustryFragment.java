@@ -79,7 +79,7 @@ public class OccupancyIndustryFragment extends Fragment {
 
         wv_OccupancyIndustry.getSettings().setJavaScriptEnabled(true);
         wv_OccupancyIndustry.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        //wbSummry.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        wv_OccupancyIndustry.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         wv_OccupancyIndustry.getSettings().setDomStorageEnabled(true);
         wv_OccupancyIndustry.getSettings().setAppCacheEnabled(true);
         wv_OccupancyIndustry.getSettings().setSupportZoom(true);

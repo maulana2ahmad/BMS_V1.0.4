@@ -71,7 +71,7 @@ public class SummaryFragment extends Fragment {
 
         wbSummry.getSettings().setJavaScriptEnabled(true);
         wbSummry.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        //wbSummry.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        wbSummry.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         wbSummry.getSettings().setDomStorageEnabled(true);
         wbSummry.getSettings().setAppCacheEnabled(true);
         wbSummry.getSettings().setSupportZoom(true);

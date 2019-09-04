@@ -77,7 +77,7 @@ public class OccupancyDetileFragment extends Fragment {
 
         wv_OccupancyDetile.getSettings().setJavaScriptEnabled(true);
         wv_OccupancyDetile.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        //wbSummry.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        wv_OccupancyDetile.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         wv_OccupancyDetile.getSettings().setDomStorageEnabled(true);
         wv_OccupancyDetile.getSettings().setAppCacheEnabled(true);
         wv_OccupancyDetile.getSettings().setSupportZoom(true);

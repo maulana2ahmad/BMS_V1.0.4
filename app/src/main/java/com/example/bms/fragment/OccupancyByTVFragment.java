@@ -77,7 +77,7 @@ public class OccupancyByTVFragment extends Fragment {
 
         wv_OccupancyByTv.getSettings().setJavaScriptEnabled(true);
         wv_OccupancyByTv.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-        //wbSummry.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        wv_OccupancyByTv.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         wv_OccupancyByTv.getSettings().setDomStorageEnabled(true);
         wv_OccupancyByTv.getSettings().setAppCacheEnabled(true);
         wv_OccupancyByTv.getSettings().setSupportZoom(true);
