@@ -60,12 +60,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //method login
     private void userLogin() {
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_Dark_Dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
-        progressDialog.show();
-
         String username = edt_Username.getText().toString().trim();
         String password = edt_Password.getText().toString().trim();
 
@@ -104,6 +98,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             edt_Password.requestFocus();
         }
         */
+
+        //progressDialog
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
+        progressDialog.show();
+        //end progressDialog
 
         //call class interface and class Apiretrofit
         Call<ResponseBody> call = ApiRetrofit
@@ -169,6 +170,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    private void ProgressDialogShow(){
+
+    }
 
     @Override
     public void onClick(View view) {

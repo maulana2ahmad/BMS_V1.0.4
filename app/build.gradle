@@ -37,4 +37,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
 
     implementation "com.android.support:design:$designVersion"
+
+    // Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.4.0'
 }
