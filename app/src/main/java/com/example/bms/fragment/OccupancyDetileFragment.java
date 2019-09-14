@@ -86,7 +86,7 @@ public class OccupancyDetileFragment extends Fragment {
         wv_OccupancyDetile.loadUrl(pageUrl);
         //wbSummry.addJavascriptInterface(new SimpleWebJavascriptInterface(getActivity()), "Android");
         mswipeRefreshLayout.setRefreshing(true);
-        mswipeRefreshLayout.setColorSchemeResources(R.color.greenPrimary, R.color.yellowPrimary, R.color.redPrimary, R.color.bluePrimary);
+        mswipeRefreshLayout.setColorSchemeResources(R.color.greenPrimary, R.color.yellowPrimary, R.color.redPrimary, R.color.blueSecondary);
         wv_OccupancyDetile.setWebViewClient(new WebViewClient() {
 
             @Override

@@ -128,7 +128,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Log.e("LOGINGAGAL", "x");
                         Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
-                        return;
 
                     } else {
 
@@ -142,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 MODE_PRIVATE).edit();
 
                         sp.putString("x", response.body().string());
-                        sp.commit();
+                        sp.apply();
                         startActivity(intent);
                         finish();
 

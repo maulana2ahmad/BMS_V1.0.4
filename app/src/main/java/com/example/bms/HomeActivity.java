@@ -100,7 +100,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 title = ("Occupancy By TV");
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, new OccupancyByTVFragment())
+                        .replace(R.id.fragment_container, new OccupancyByTVFragment(token))
                         .commit();
                 break;
 
@@ -126,7 +126,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 getSharedPreferences("TOKEN", 0)
                         .edit()
                         .clear()
-                        .commit();
+                        .apply();
 
         }
 

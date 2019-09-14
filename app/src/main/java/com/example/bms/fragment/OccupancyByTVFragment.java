@@ -16,6 +16,8 @@ import android.webkit.WebViewClient;
 
 import com.example.bms.R;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -24,18 +26,19 @@ public class OccupancyByTVFragment extends Fragment {
     private ProgressDialog mprogressDialog;
     private WebView wv_OccupancyByTv;
     private SwipeRefreshLayout mswipeRefreshLayout;
-    //private String token;
+    private String token;
 
 
     //url
-    private String pageUrl = "http://portal-bams.mncgroup.com:8008/occupancybytv";
+    private String pageUrl = "http://portal-bams.mncgroup.com:8008/occupancybytv/";
 
     private String DEFAULT_ERROR_PAGE_PATH = "file:///android_asset/html/colorlib_error_404_10/index.html";
 
     private static final String TAG = "WebViewCustomization";
 
 
-    public OccupancyByTVFragment() {
+    public OccupancyByTVFragment(String token) {
+        this.token = token;
         // Required empty public constructor
     }
 
@@ -48,7 +51,7 @@ public class OccupancyByTVFragment extends Fragment {
 
         getActivity().setTitle("Occupancy By TV");
 
-        //this.token = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE).getString("x", "");
+        this.token = getActivity().getSharedPreferences("TOKEN", MODE_PRIVATE).getString("x", "");
 
         wv_OccupancyByTv = (WebView) view.findViewById(R.id.wv_OccupancyByTv);
 
@@ -83,10 +86,10 @@ public class OccupancyByTVFragment extends Fragment {
         wv_OccupancyByTv.getSettings().setSupportZoom(true);
         wv_OccupancyByTv.getSettings().setSupportMultipleWindows(true);
         mprogressDialog = ProgressDialog.show(getActivity(), "", "Please wait for a moment...");
-        wv_OccupancyByTv.loadUrl(pageUrl);
+        wv_OccupancyByTv.loadUrl(pageUrl + token);
         //wbSummry.addJavascriptInterface(new SimpleWebJavascriptInterface(getActivity()), "Android");
         mswipeRefreshLayout.setRefreshing(true);
-        mswipeRefreshLayout.setColorSchemeResources(R.color.greenPrimary, R.color.yellowPrimary, R.color.redPrimary, R.color.bluePrimary);
+        mswipeRefreshLayout.setColorSchemeResources(R.color.greenPrimary, R.color.yellowPrimary, R.color.redPrimary, R.color.blueSecondary);
         wv_OccupancyByTv.setWebViewClient(new WebViewClient() {
 
             @Override

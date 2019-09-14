@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,9 +81,11 @@ public class SummaryFragment extends Fragment {
         wbSummry.getSettings().setSupportMultipleWindows(true);
         mprogressDialog = ProgressDialog.show(getActivity(),"","Please wait for a moment...");
         wbSummry.loadUrl(pageUrl + token);
+        Log.e(TAG, "LoadWeb: " + pageUrl);
         //wbSummry.addJavascriptInterface(new SimpleWebJavascriptInterface(getActivity()), "Android");
         mswipeRefreshLayout.setRefreshing(true);
-        mswipeRefreshLayout.setColorSchemeResources(R.color.greenPrimary, R.color.yellowPrimary, R.color.redPrimary, R.color.bluePrimary);
+        mswipeRefreshLayout.setColorSchemeResources(R.color.greenPrimary, R.color.yellowPrimary, R.color.redPrimary, R.color.blueSecondary);
+
         wbSummry.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -103,6 +106,5 @@ public class SummaryFragment extends Fragment {
                 mswipeRefreshLayout.setRefreshing(false);
             }
         });
-
     }
 }
